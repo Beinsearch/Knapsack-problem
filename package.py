@@ -2,6 +2,7 @@
 import numpy as np
 from time import clock
 
+#递归
 def package_recursion(volume,value,capacity):
     l = len(volume)
     if capacity==0:return np.zeros(l,dtype=int)
@@ -19,6 +20,7 @@ def package_recursion(volume,value,capacity):
     else:
         return np.append(0,s2)
 
+#动态规划
 def package_dynamicplanning(weight,value,capacity):
     l = len(weight)
     minw = min(weight)
@@ -30,11 +32,12 @@ def package_dynamicplanning(weight,value,capacity):
         return [1]*l
 
     sol = {}
-    #解字典，sol[weight_i]=[value,index[]]
+    #解字典，sol[背包重量限制_前i个物品]=[最大价值,选择的物品列表]]
+    #初始化
     for j in range(0,capacity+1):
         for i in range(l):              
             sol.setdefault('_'.join([str(j),str(i)]),[0,blank])
-    
+    #只能选第一个物品时，当背包足够大，所能收纳的最大价值为value[0]
     blank2 = blank[:]
     blank2[0] = 1      
     for j in range(1,capacity+1):
@@ -43,7 +46,7 @@ def package_dynamicplanning(weight,value,capacity):
             
     for j in range(1,capacity+1):
         for i in range(1,l):
-            if weight[i] > j:
+            if weight[i] > j:   #第i个物品超出背包容量限制
                 sol['_'.join([str(j),str(i)])] = sol['_'.join([str(j),str(i-1)])]
             else:
                 v1 = sol['_'.join([str(j),str(i-1)])][0]
