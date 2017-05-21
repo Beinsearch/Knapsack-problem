@@ -32,7 +32,7 @@ def package_dynamicplanning(weight,value,capacity):
         return [1]*l
 
     sol = {}
-    #解字典，sol[背包重量限制_前i个物品]=[最大价值,选择的物品列表]]
+    #解字典，sol[背包重量限制_前i个物品]=[最大价值,选择的物品列表]
     #初始化
     for j in range(0,capacity+1):
         for i in range(l):              
